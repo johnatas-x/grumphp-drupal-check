@@ -1,19 +1,15 @@
 {
-    "name": "metadrop/grumphp-drupal-check",
+    "name": "johnatas-x/grumphp-drupal-check",
     "description": "Execute drupal check in a grumphp task.",
     "type": "library",
     "require": {
-        "phpro/grumphp": "~1.0",
-        "mglaman/drupal-check": "^1.1.10"
+        "phpro/grumphp": "^1.15.0",
+        "mglaman/drupal-check": "^1.4.0"
     },
     "authors": [
         {
-            "name": "Sady sierralta olivares",
-            "email": "sady.sierralta@metadrop.net"
-        },
-        {
-            "name": "Omar Mohamad - El Hassan Lopesino",
-            "email": "omarmoper@gmail.com"
+            "name": "Johnatas",
+            "role": "Maintainer"
         }
     ],
     "autoload": {

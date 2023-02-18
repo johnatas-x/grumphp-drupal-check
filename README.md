@@ -8,7 +8,7 @@ During a commit check Drupal code for deprecations and discover bugs via static 
 
 Install it using composer:
 
-```composer require --dev metadrop/grumphp-drupal-check```
+```composer require --dev johnatas-x/grumphp-drupal-check```
 
 
 # Usage
@@ -28,6 +28,7 @@ tasks:
     deprecations: true
     analysis: true
     php8: true
+    exclude_dir: []
 ```
 Optionally, you can define multiple DrupalCheck arguments:
 
@@ -36,3 +37,4 @@ Optionally, you can define multiple DrupalCheck arguments:
 - **deprecations** (boolean): Check code for deprecations. By default it is true.
 - **analysis** (boolean): Check code analysis.
 - **php8** (boolean): Set PHPStan phpVersion for 8.1 (Drupal 10 requirement).
+- **exclude_dir** (array): Exclude directories. Wildcards work.
