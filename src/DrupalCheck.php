@@ -38,12 +38,14 @@ class DrupalCheck extends AbstractExternalTask
         'deprecations' => true,
         'analysis' => false,
         'php8' => false,
+        'exclude_dir' => [],
       ]);
       $resolver->addAllowedTypes('drupal_root', ['string', 'null']);
       $resolver->addAllowedTypes('memory_limit', ['string', 'null']);
       $resolver->addAllowedTypes('deprecations', ['boolean']);
       $resolver->addAllowedTypes('analysis', ['boolean']);
       $resolver->addAllowedTypes('php8', ['boolean']);
+      $resolver->addAllowedTypes('exclude_dir', ['array']);
 
       return $resolver;
   }
@@ -77,6 +79,7 @@ class DrupalCheck extends AbstractExternalTask
     $arguments->add('--no-progress');
     $arguments->addOptionalArgument('--drupal-root=%s', $options['drupal_root']);
     $arguments->addOptionalArgument('--memory-limit=%s', $options['memory_limit']);
+    $arguments->addOptionalCommaSeparatedArgument('--exclude-dir=%s', $config['exclude_dir']);
     $arguments->addFiles($files);
     $process = $this->processBuilder->buildProcess($arguments);
     $process->run();
