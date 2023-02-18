@@ -2,6 +2,8 @@
     "name": "johnatas-x/grumphp-drupal-check",
     "description": "Execute drupal check in a grumphp task.",
     "type": "library",
+    "homepage": "https://github.com/johnatas-x/grumphp-drupal-check",
+    "license": "proprietary",
     "require": {
         "phpro/grumphp": "^1.15.0",
         "mglaman/drupal-check": "^1.4.0"
@@ -12,6 +14,10 @@
             "role": "Maintainer"
         }
     ],
+    "support": {
+        "issues": "https://github.com/johnatas-x/grumphp-drupal-check/issues",
+        "source": "https://github.com/johnatas-x/grumphp-drupal-check"
+    },
     "autoload": {
         "psr-4": {"GrumphpDrupalCheck\\": "src/"}
     }
