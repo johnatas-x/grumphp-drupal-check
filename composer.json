@@ -14,10 +14,5 @@
     ],
     "autoload": {
         "psr-4": {"GrumphpDrupalCheck\\": "src/"}
-    },
-    "config": {
-        "allow-plugins": {
-            "phpro/grumphp": true
-        }
     }
 }
