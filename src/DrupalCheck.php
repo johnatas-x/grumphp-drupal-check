@@ -8,7 +8,7 @@ use GrumPHP\Task\AbstractExternalTask;
 use GrumPHP\Task\Context\ContextInterface;
 use GrumPHP\Task\Context\GitPreCommitContext;
 use GrumPHP\Task\Context\RunContext;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use _HumbugBox1bcd60ea4a04\Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Drupal check task.
