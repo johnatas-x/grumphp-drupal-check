@@ -79,7 +79,7 @@ class DrupalCheck extends AbstractExternalTask
     $arguments->add('--no-progress');
     $arguments->addOptionalArgument('--drupal-root=%s', $options['drupal_root']);
     $arguments->addOptionalArgument('--memory-limit=%s', $options['memory_limit']);
-    $arguments->addOptionalCommaSeparatedArgument('--exclude-dir=%s', $config['exclude_dir']);
+    $arguments->addOptionalCommaSeparatedArgument('--exclude-dir=%s', $options['exclude_dir']);
     $arguments->addFiles($files);
     $process = $this->processBuilder->buildProcess($arguments);
     $process->run();
