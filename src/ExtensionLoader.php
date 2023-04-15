@@ -1,9 +1,10 @@
 <?php
+
 namespace GrumphpDrupalCheck;
 
 use GrumPHP\Extension\ExtensionInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
+use _HumbugBox1bcd60ea4a04\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _HumbugBox1bcd60ea4a04\Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Load extensions for grumphp.
@@ -11,14 +12,15 @@ use Symfony\Component\DependencyInjection\Reference;
 class ExtensionLoader implements ExtensionInterface
 {
     /**
-     * @param ContainerBuilder $container
+     * @param \_HumbugBox1bcd60ea4a04\Symfony\Component\DependencyInjection\ContainerBuilder $container
      *
-     * @return \Symfony\Component\DependencyInjection\Definition
-     * @throws \Exception
-     * @throws \Symfony\Component\DependencyInjection\Exception\BadMethodCallException
-     * @throws \Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
-     * @throws \Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
-     * @throws \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+     * @return \_HumbugBox1bcd60ea4a04\Symfony\Component\DependencyInjection\Definition
+     *
+     * @throws \_HumbugBox1bcd60ea4a04\Exception
+     * @throws \_HumbugBox1bcd60ea4a04\Symfony\Component\DependencyInjection\Exception\BadMethodCallException
+     * @throws \_HumbugBox1bcd60ea4a04\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+     * @throws \_HumbugBox1bcd60ea4a04\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
+     * @throws \_HumbugBox1bcd60ea4a04\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
      */
     public function load(ContainerBuilder $container) : void
     {

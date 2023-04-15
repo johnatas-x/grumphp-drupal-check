@@ -1,3 +1,5 @@
+> :warning: **For now, this project only works with version 1.15.0 of [grumphp-shim](https://github.com/phpro/grumphp-shim) (GrumPHP as a phar).** :warning:
+
 # Description
 
 This repository adds a task for GrumPHP that launchs [drupal-check](https://github.com/mglaman/drupal-check).
