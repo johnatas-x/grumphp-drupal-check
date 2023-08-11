@@ -1,4 +1,4 @@
-> :warning: **For now, this project only works with version 1.15.0 of [grumphp-shim](https://github.com/phpro/grumphp-shim) (GrumPHP as a phar).** :warning:
+> :warning: **The version 2 of this project is made for GrumPHP 2.0. Check release 1.1.0 for GrumPHP 1.15** :warning:
 
 # Description
 
@@ -24,7 +24,7 @@ extensions:
 2) Add drupal check to the tasks:
 ```
 tasks:
-  drupalcheck:
+  drupal_check:
     drupal_root: ~
     memory_limit: ~
     deprecations: true

@@ -1,64 +1,75 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GrumphpDrupalCheck;
 
 use GrumPHP\Runner\TaskResult;
 use GrumPHP\Runner\TaskResultInterface;
-use GrumPHP\Task\AbstractExternalTask;
+use GrumPHP\Task\Config\ConfigOptionsResolver;
+use GrumPHP\Task\Config\EmptyTaskConfig;
+use GrumPHP\Task\Config\TaskConfigInterface;
 use GrumPHP\Task\Context\ContextInterface;
 use GrumPHP\Task\Context\GitPreCommitContext;
 use GrumPHP\Task\Context\RunContext;
+use GrumPHP\Task\TaskInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Drupal check task.
  */
-class DrupalCheck extends AbstractExternalTask
+final class DrupalCheck implements TaskInterface
 {
 
-  /**
-   * @param ContextInterface $context
-   *
-   * @return bool
-   */
+  private EmptyTaskConfig|TaskConfigInterface $config;
+
+  public function __construct()
+  {
+    $this->config = new EmptyTaskConfig();
+  }
+
+  public static function getConfigurableOptions(): ConfigOptionsResolver {
+    $resolver = new OptionsResolver();
+    $resolver->setDefaults([
+      'drupal_root' => '',
+      'memory_limit' => '',
+      'deprecations' => true,
+      'analysis' => false,
+      'php8' => false,
+      'exclude_dir' => [],
+    ]);
+    $resolver->addAllowedTypes('drupal_root', ['string', 'null']);
+    $resolver->addAllowedTypes('memory_limit', ['string', 'null']);
+    $resolver->addAllowedTypes('deprecations', ['boolean']);
+    $resolver->addAllowedTypes('analysis', ['boolean']);
+    $resolver->addAllowedTypes('php8', ['boolean']);
+    $resolver->addAllowedTypes('exclude_dir', ['array']);
+
+    return ConfigOptionsResolver::fromOptionsResolver($resolver);
+  }
+
+  public function getConfig(): TaskConfigInterface
+  {
+    return $this->config;
+  }
+
+  public function withConfig(TaskConfigInterface $config): TaskInterface
+  {
+    $new = clone $this;
+    $new->config = $config;
+
+    return $new;
+  }
+
   public function canRunInContext(ContextInterface $context): bool
   {
       return $context instanceof GitPreCommitContext || $context instanceof RunContext;
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public static function getConfigurableOptions(): OptionsResolver
-  {
-      $resolver = new OptionsResolver();
-      $resolver->setDefaults([
-        'drupal_root' => '',
-        'memory_limit' => '',
-        'deprecations' => true,
-        'analysis' => false,
-        'php8' => false,
-        'exclude_dir' => [],
-      ]);
-      $resolver->addAllowedTypes('drupal_root', ['string', 'null']);
-      $resolver->addAllowedTypes('memory_limit', ['string', 'null']);
-      $resolver->addAllowedTypes('deprecations', ['boolean']);
-      $resolver->addAllowedTypes('analysis', ['boolean']);
-      $resolver->addAllowedTypes('php8', ['boolean']);
-      $resolver->addAllowedTypes('exclude_dir', ['array']);
-
-      return $resolver;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function run(ContextInterface $context): TaskResultInterface
   {
     $config = $this->getConfig();
     $options = $config->getOptions();
-
-    /** @var \GrumPHP\Collection\FilesCollection $files */
     $files = $context->getFiles();
     $triggered_by = [
       'php',
@@ -69,9 +80,11 @@ class DrupalCheck extends AbstractExternalTask
       'theme',
     ];
     $files = $files->extensions($triggered_by);
+
     if (0 === \count($files)) {
         return TaskResult::createSkipped($this, $context);
     }
+
     $arguments = $this->processBuilder->createArgumentsForCommand('drupal-check');
     !$options['analysis'] ?: $arguments->add('--analysis');
     !$options['deprecations'] ?: $arguments->add('--deprecations');
@@ -83,10 +96,12 @@ class DrupalCheck extends AbstractExternalTask
     $arguments->addFiles($files);
     $process = $this->processBuilder->buildProcess($arguments);
     $process->run();
+
     if (!$process->isSuccessful()) {
         $output = $this->formatter->format($process);
         return TaskResult::createFailed($this, $context, $output);
     }
+
     return TaskResult::createPassed($this, $context);
   }
 
