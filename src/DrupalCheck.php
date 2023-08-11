@@ -6,27 +6,18 @@ namespace GrumphpDrupalCheck;
 
 use GrumPHP\Runner\TaskResult;
 use GrumPHP\Runner\TaskResultInterface;
+use GrumPHP\Task\AbstractExternalTask;
 use GrumPHP\Task\Config\ConfigOptionsResolver;
-use GrumPHP\Task\Config\EmptyTaskConfig;
-use GrumPHP\Task\Config\TaskConfigInterface;
 use GrumPHP\Task\Context\ContextInterface;
 use GrumPHP\Task\Context\GitPreCommitContext;
 use GrumPHP\Task\Context\RunContext;
-use GrumPHP\Task\TaskInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Drupal check task.
  */
-final class DrupalCheck implements TaskInterface
+final class DrupalCheck extends AbstractExternalTask
 {
-
-  private EmptyTaskConfig|TaskConfigInterface $config;
-
-  public function __construct()
-  {
-    $this->config = new EmptyTaskConfig();
-  }
 
   public static function getConfigurableOptions(): ConfigOptionsResolver {
     $resolver = new OptionsResolver();
@@ -46,19 +37,6 @@ final class DrupalCheck implements TaskInterface
     $resolver->addAllowedTypes('exclude_dir', ['array']);
 
     return ConfigOptionsResolver::fromOptionsResolver($resolver);
-  }
-
-  public function getConfig(): TaskConfigInterface
-  {
-    return $this->config;
-  }
-
-  public function withConfig(TaskConfigInterface $config): TaskInterface
-  {
-    $new = clone $this;
-    $new->config = $config;
-
-    return $new;
   }
 
   public function canRunInContext(ContextInterface $context): bool
@@ -81,7 +59,7 @@ final class DrupalCheck implements TaskInterface
     ];
     $files = $files->extensions($triggered_by);
 
-    if (0 === \count($files)) {
+    if (0 === count($files)) {
         return TaskResult::createSkipped($this, $context);
     }
 
