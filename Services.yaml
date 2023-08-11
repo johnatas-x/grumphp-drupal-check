@@ -1,0 +1,8 @@
+services:
+  GrumphpDrupalCheck\DrupalCheck:
+    class: GrumphpDrupalCheck\DrupalCheck
+    arguments:
+      - '@process_builder'
+      - '@formatter.raw_process'
+    tags:
+      - {name: grumphp.task, task: drupal_check}
