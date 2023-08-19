@@ -29,6 +29,7 @@ tasks:
     memory_limit: ~
     deprecations: true
     analysis: true
+    style: true
     php8: true
     exclude_dir: []
 ```
@@ -38,5 +39,6 @@ Optionally, you can define multiple DrupalCheck arguments:
 - **memory_limit** (string): Configure memory limit for the process.
 - **deprecations** (boolean): Check code for deprecations. By default it is true.
 - **analysis** (boolean): Check code analysis.
+- **style** (boolean): Check code style
 - **php8** (boolean): Set PHPStan phpVersion for 8.1 (Drupal 10 requirement).
 - **exclude_dir** (array): Exclude directories. Wildcards work.
