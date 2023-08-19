@@ -23,8 +23,7 @@
     },
     "config": {
         "allow-plugins": {
-            "phpro/grumphp": true,
-            "phpro/grumphp-shim": true
+            "phpro/grumphp": true
         }
     }
 }

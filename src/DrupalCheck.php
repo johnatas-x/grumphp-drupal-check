@@ -26,6 +26,7 @@ final class DrupalCheck extends AbstractExternalTask
       'memory_limit' => '',
       'deprecations' => true,
       'analysis' => false,
+      'style' => false,
       'php8' => false,
       'exclude_dir' => [],
     ]);
@@ -33,6 +34,7 @@ final class DrupalCheck extends AbstractExternalTask
     $resolver->addAllowedTypes('memory_limit', ['string', 'null']);
     $resolver->addAllowedTypes('deprecations', ['boolean']);
     $resolver->addAllowedTypes('analysis', ['boolean']);
+    $resolver->addAllowedTypes('style', ['boolean']);
     $resolver->addAllowedTypes('php8', ['boolean']);
     $resolver->addAllowedTypes('exclude_dir', ['array']);
 
@@ -66,6 +68,7 @@ final class DrupalCheck extends AbstractExternalTask
     $arguments = $this->processBuilder->createArgumentsForCommand('drupal-check');
     !$options['analysis'] ?: $arguments->add('--analysis');
     !$options['deprecations'] ?: $arguments->add('--deprecations');
+    !$options['style'] ?: $arguments->add('--style');
     !$options['php8'] ?: $arguments->add('--php8');
     $arguments->add('--no-progress');
     $arguments->addOptionalArgument('--drupal-root=%s', $options['drupal_root']);
