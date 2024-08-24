@@ -5,8 +5,8 @@
     "homepage": "https://github.com/johnatas-x/grumphp-drupal-check",
     "license": "proprietary",
     "require": {
-        "phpro/grumphp": "^2.6.0",
-        "mglaman/drupal-check": "^1.4.0"
+        "phpro/grumphp": "^2.7.0",
+        "mglaman/drupal-check": "^1.5.0"
     },
     "authors": [
         {
