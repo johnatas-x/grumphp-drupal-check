@@ -3,7 +3,6 @@
     "description": "Execute drupal check in a grumphp task.",
     "type": "library",
     "homepage": "https://github.com/johnatas-x/grumphp-drupal-check",
-    "license": "proprietary",
     "require": {
         "phpro/grumphp": "2.21.0",
         "mglaman/drupal-check": "1.5.0"
